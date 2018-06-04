@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<!-- ================================================================================== 
+	== Build File for VDoc - Generic VDoc Ant Build (2012) ================================================================================== -->
+
+<project name="Test - PROJET" default="copy-all" basedir=".">
+	<!-- ================================================================================== 
+		== Variable definition ================================================================================== -->
+	<property file="buildVdocPRJ.properties" />
+
+	<property name="custom" value="${VDOC_HOME}/custom" />
+	<property name="vdoc.ear" value="${VDOC_HOME}/JBoss/server/all/deploy/vdoc.ear" />
+
+	<target name="copy-jar">
+		<!-- create JAR and deploy to "custom/lib" -->
+		<jar destfile="output/${JAR_NAME}" basedir="bin" />
+		<copy todir="${custom}/lib" overwrite="true">
+			<fileset dir="output">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+		<copy todir="${vdoc.ear}/lib/" overwrite="true">
+					<fileset dir="output">
+						<include name="*.jar" />
+					</fileset>
+		</copy>
+	</target>
+
+
+	<target name="copy-all" depends="copy-jar" />
+</project>
