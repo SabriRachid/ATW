@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="9"/>
+	<style name="style1"/>
+	<parameter name="Total" class="java.lang.String"/>
+	<parameter name="montantLettre" class="java.lang.String"/>
+	<parameter name="NumOrdre" class="java.lang.String"/>
+	<parameter name="Filiale" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[Select top 1 * from conjoint]]>
+	</queryString>
+	<field name="Cin" class="java.lang.String"/>
+	<field name="Nom" class="java.lang.String"/>
+	<field name="Prenom" class="java.lang.String"/>
+	<field name="DateNaissance" class="java.sql.Date"/>
+	<field name="PersonnelMatricule" class="java.lang.String"/>
+	<field name="NCMIM" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="148" splitType="Stretch">
+			<staticText>
+				<reportElement  x="148" y="86" width="267" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="18"/>
+				</textElement>
+				<text><![CDATA[ORDRE DE PAIEMENT]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement  x="378" y="35" width="52" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Ordre :]]></text>
+			</staticText>
+			<textField>
+				<reportElement  x="430" y="35" width="110" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NumOrdre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement  x="19" y="0" width="86" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<text><![CDATA[GUICHET : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="379" y="-51" width="32" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<textField>
+				<reportElement  x="412" y="-51" width="126" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement  x="105" y="0" width="113" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Centre d'affaires 2001]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="457" splitType="Stretch">
+			<staticText>
+				<reportElement  x="19" y="18" width="175" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<text><![CDATA[Nom du donneur d'ordre : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="19" y="66" width="279" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<text><![CDATA[Veuillez virer par le débit de notre compte n° ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="19" y="110" width="86" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<text><![CDATA[La somme de : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="19" y="157" width="58" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<text><![CDATA[Montant : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="19" y="198" width="99" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<text><![CDATA[En faveur de : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="19" y="238" width="99" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<text><![CDATA[Domicilé chez : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="19" y="279" width="72" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<text><![CDATA[Compte N° : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="19" y="335" width="174" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<text><![CDATA[Instructions particuliéres :]]></text>
+			</staticText>
+			<textField>
+				<reportElement  x="77" y="157" width="436" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{montantLettre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement  x="298" y="426" width="215" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Signature de donneur d'ordre ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="298" y="66" width="215" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[0200 N 000 000 146]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="118" y="198" width="193" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Détail envoyé par fichier]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="118" y="238" width="193" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Détail envoyé par fichier]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="102" y="279" width="193" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Détail envoyé par fichier]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="194" y="335" width="141" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Virement Note de frais]]></text>
+			</staticText>
+			<textField>
+				<reportElement  x="193" y="18" width="186" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Filiale}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="105" y="110" width="190" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

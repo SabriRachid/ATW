@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DemConge" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="96f7114c-8726-423f-985e-3d74528d566f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="14"/>
+	<queryString>
+		<![CDATA[select * from Personnel pe,poste po]]>
+	</queryString>
+	<field name="matricule" class="java.lang.String"/>
+	<field name="supMatricule" class="java.lang.String"/>
+	<field name="PosteIdPoste" class="java.lang.String"/>
+	<field name="DirectionIdDirection" class="java.lang.String"/>
+	<field name="Nom" class="java.lang.String"/>
+	<field name="Prenom" class="java.lang.String"/>
+	<field name="DateNaissance" class="java.sql.Date"/>
+	<field name="Adresse" class="java.lang.String"/>
+	<field name="Email" class="java.lang.String"/>
+	<field name="Nationalite" class="java.lang.String"/>
+	<field name="DateEmbaucheGroupe" class="java.sql.Date"/>
+	<field name="DateEmbaucheFiliale" class="java.sql.Date"/>
+	<field name="Photo" class="java.lang.String"/>
+	<field name="SituationFamiliale" class="java.lang.String"/>
+	<field name="NCNSS" class="java.lang.String"/>
+	<field name="NCIMR" class="java.lang.String"/>
+	<field name="NCMIM" class="java.lang.String"/>
+	<field name="SBA" class="java.lang.Float"/>
+	<field name="SBM" class="java.lang.Float"/>
+	<field name="Bonus" class="java.lang.Float"/>
+	<field name="Avantage" class="java.lang.Float"/>
+	<field name="NombreEnfant" class="java.lang.Integer"/>
+	<field name="NombreJoursConge" class="java.lang.Float"/>
+	<field name="NombrJoursDispo" class="java.lang.Float"/>
+	<field name="loginVdoc" class="java.lang.String"/>
+	<field name="Etat" class="java.lang.String"/>
+	<field name="sexeMasculin" class="java.lang.Boolean"/>
+	<field name="FilialeIdFiliale" class="java.lang.String"/>
+	<field name="IdPoste" class="java.lang.String"/>
+	<field name="LibellePoste" class="java.lang.String"/>
+	<field name="Descriptif" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="100" splitType="Stretch">
+			<image>
+				<reportElement uuid="4d7dc8e8-0536-4597-bcbf-bb9281776ee3" x="0" y="0" width="135" height="100"/>
+				<imageExpression><![CDATA["C:\\VDocPlatform\\JBoss\\server\\all\\deploy\\vdoc.ear\\vdoc.war\\RH\\Wafagestion.png"]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="70168b5b-08c7-4996-b390-dba92c60b027" x="471" y="80" width="84" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a65d7d39-eeb7-4253-a9bc-ba12cf205dfa" x="397" y="80" width="83" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Casablanca, le]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4ce32016-9877-4e82-92a9-5689fae585cf" x="191" y="80" width="160" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Réf : DEMCON000001/032017]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="643" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="52a779c4-d87d-4f40-add3-bf78989a9d8a" x="14" y="6" width="530" height="37" backcolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="79e969e3-d097-4e61-a60c-ceabe0770010" mode="Opaque" x="24" y="11" width="508" height="22" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMPTE RENDU DU DEPART EN CONGE PROFESSIONNEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="061b07e1-74ad-4710-b930-ddfe293f40e0" x="14" y="95" width="156" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nom : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9d119254-06e5-4640-9734-3285f6ab43f6" x="14" y="129" width="71" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fonction : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2bd77573-8749-4cfd-be58-27a034207f1f" x="14" y="147" width="71" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ancienneté : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3b7a2a81-67c7-420d-b75d-f17aef205757" x="14" y="164" width="156" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remplaçement assuré par : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8154fdc9-0217-4836-ad5a-a77915028d68" x="14" y="181" width="156" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Durée du congé demandé : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a24ad40a-07e0-486f-9af0-0173d7056ff2" x="170" y="181" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[Jours ouvrables]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ca05ea25-4d3d-454b-9a1c-6ea1cfb667cc" x="14" y="65" width="100" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Infos salarié ]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="0150981e-421b-4315-a7c6-a4f4f0258233" x="14" y="87" width="530" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="220d325d-51d8-46d8-9021-fa0c6b0ec99c" x="14" y="230" width="113" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Période du congé]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="8a58a851-8585-45eb-8673-6eb9a8bdd61b" x="14" y="253" width="530" height="1"/>
+			</line>
+			<rectangle>
+				<reportElement uuid="f0be42bb-e9c0-450c-908f-6dd7e9827f96" x="14" y="368" width="113" height="20" backcolor="#E5E5E5"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="4973d5f3-eaf9-4c05-94fc-7cf91b4c26d4" x="127" y="368" width="124" height="20" backcolor="#E5E5E5"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="f0a113a1-34b9-41a4-8a27-e82a5382c77d" x="251" y="368" width="100" height="20" backcolor="#E5E5E5"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="23f6dc1e-1e52-4e26-851b-7a79a2c424f8" x="351" y="368" width="100" height="20" backcolor="#E5E5E5"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="3d208a12-7337-48d7-868f-badbdf042f2f" x="451" y="368" width="93" height="20" backcolor="#E5E5E5"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="3f0f7e33-e44d-4176-bcec-87b63c9a9dd1" x="14" y="388" width="113" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="1d5904ab-7b54-48c7-8803-b4de9c134be3" x="451" y="388" width="93" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8328c8ad-4a8f-435c-a625-a5ee5bc45909" x="251" y="388" width="100" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="cd0547b7-e406-4fca-886c-035aa6c416ee" x="351" y="388" width="100" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c8205355-b991-4b09-88c8-e5d200598c5d" x="127" y="388" width="124" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="93812b47-0de7-494b-b6fc-873f90fd1c4b" x="14" y="408" width="113" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="e392a81e-40ce-4284-b570-6bf362eb1b81" x="451" y="408" width="93" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="31578556-75cf-4b77-ade6-0ad117a6e979" x="251" y="408" width="100" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="790e6d4f-c5b2-439a-a248-a210b1af36c6" x="351" y="408" width="100" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="49bad41c-fba4-4073-a965-00ee6caf2bf8" x="127" y="408" width="124" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="45c10c7f-8fde-414c-a6e7-c40bb4ec822d" x="14" y="428" width="113" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="fcf24ae1-1afe-4d21-915f-305ec9be2611" x="451" y="428" width="93" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="0f34c810-1e60-4a05-907e-f3f6b013a71f" x="251" y="428" width="100" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="0d4c246b-78b4-4940-9206-37e2377aef4e" x="351" y="428" width="100" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="1c7a7371-fb80-49e5-9a4b-564f248515c6" x="127" y="428" width="124" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="0a0dc292-0e11-4606-a1d9-aae87bc76e93" x="24" y="368" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Désignation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ff8e8d2a-fe8a-4710-8da4-eea29ccf1836" x="135" y="368" width="116" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Droits au 1er janvier]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="06840cc9-bbdb-4de5-8519-35a7d06ef282" x="260" y="368" width="88" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Congé déjà pris]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a86ce909-9375-426b-a088-8790908481ba" x="358" y="368" width="90" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Congés demandés]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="af01f567-5ad0-433b-8510-4f7b72f228bf" x="459" y="368" width="85" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reliquat]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="14ae774a-88bf-42de-afb3-68267b57887f" x="14" y="264" width="156" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c0750fd8-d87c-49fd-b42f-963c592c0739" x="170" y="264" width="374" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="c594865d-fc9a-4436-8694-dcb103b8bab6" x="34" y="264" width="136" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[Jour de départ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="ed81f0a7-3524-4d2a-86f3-f3ac858a9f36" x="14" y="284" width="156" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="d82b83f3-99dd-4570-a5e5-00270546b152" x="34" y="284" width="136" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[Jour de reprise (non inclus)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="b39e7304-0a07-4bad-9020-46d5280e3e5b" x="170" y="284" width="374" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="220d325d-51d8-46d8-9021-fa0c6b0ec99c" x="14" y="337" width="134" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Etat global des congés]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="8a58a851-8585-45eb-8673-6eb9a8bdd61b" x="14" y="360" width="530" height="1"/>
+			</line>
+			<rectangle>
+				<reportElement uuid="45c10c7f-8fde-414c-a6e7-c40bb4ec822d" x="14" y="448" width="437" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="45c10c7f-8fde-414c-a6e7-c40bb4ec822d" x="451" y="448" width="93" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="c83f9b7b-a767-471c-ad17-fdb377ae752d" x="24" y="388" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[Reliquat en cours]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7fb7b1c1-f20b-4f1b-acac-1e3de471dbd5" x="24" y="408" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[Congé de 2016]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2c62b206-675a-4c9d-a6cd-3c134489f322" x="24" y="428" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[Congé spécial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7404a6b8-2bff-477d-b504-547f1ca46ea3" x="251" y="448" width="197" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total du : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="5e7047c1-3b2d-4059-b39c-552cf4e67d71" x="49" y="95" width="178" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Nom}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="9d119254-06e5-4640-9734-3285f6ab43f6" x="14" y="112" width="156" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prénom : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="4f5d583a-cab3-4b1c-a6da-04c8a20acf7f" x="65" y="112" width="178" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Prenom}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1b5efda8-624b-4148-ab35-b26db41d0358" x="70" y="130" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[Directeur général]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fb51478f-855e-4580-9788-769ff83bbce9" x="85" y="147" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[30 ans]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="83a3c353-5574-46c5-8772-9114710c7071" x="148" y="164" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[RYAD El Mehdi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2d0b2cd7-c6b4-4478-820b-96a26b870d7b" x="151" y="181" width="19" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[15]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="84b57af2-e7b6-49d8-9412-093c974730de" x="185" y="264" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[06/03/2017]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f021dd2a-2245-4ae9-937a-f2ddbe7dd577" x="185" y="284" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[24/03/2017]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="54c2ecb4-a6fd-4a66-9de7-a22f0595fd40" x="143" y="408" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[25]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8e9a7eee-f613-44be-b954-d427a19b5772" x="270" y="408" width="53" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="59d1db82-295b-43dc-88db-39b139584500" x="362" y="408" width="53" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[15]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="eefe5c5a-a197-488e-8610-089146de889b" x="462" y="408" width="53" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[8]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e7011b9d-4a82-4b0c-a9e7-7d4ae1ab93bf" x="462" y="388" width="53" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[20]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="faf06181-4fe2-41cd-8c9f-29cab32f5ed7" x="462" y="448" width="53" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[28]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e3dbb822-8471-422f-b804-a13cc312537a" x="351" y="503" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Visa RH]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="49aa8bb9-65db-47fc-85c1-9db9cf2c6e70" x="351" y="526" width="193" height="97"/>
+			</rectangle>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement uuid="4d1464e0-f778-44ff-b47a-562b4f18aded" x="435" y="34" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="dae123aa-beff-4d54-99ff-f0d8b15b9785" x="515" y="34" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

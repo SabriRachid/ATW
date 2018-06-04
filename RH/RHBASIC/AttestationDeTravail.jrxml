@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AttestationDeTravail" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="2"/>
+	<parameter name="User" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select Nom,prenom,civilite,DescriptionPoste,DateNaissTravail,adresse,tel,email
+from Personnel,Poste,Contrat
+where Personnel.ID = $P{User}
+AND Poste.ID=Personnel.PosteID
+AND Contrat.PersonnelID=Personnel.ID;]]>
+	</queryString>
+	<field name="Nom" class="java.lang.String"/>
+	<field name="prenom" class="java.lang.String"/>
+	<field name="civilite" class="java.lang.String"/>
+	<field name="DescriptionPoste" class="java.lang.String"/>
+	<field name="DateNaissTravail" class="java.sql.Date"/>
+	<field name="adresse" class="java.lang.String"/>
+	<field name="tel" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="116" splitType="Stretch">
+			<staticText>
+				<reportElement  x="31" y="14" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Nom Prénom : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="31" y="34" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Adresse : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="31" y="74" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Téléphone : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="31" y="94" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Email : ]]></text>
+			</staticText>
+			<image>
+				<reportElement  x="299" y="14" width="256" height="60"/>
+				<imageExpression><![CDATA["C:\\Users\\Administrateur\\Desktop\\VDOC\\LOGO DIMAGAZ\\logoDimaGaz.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement  x="299" y="74" width="256" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Société DIMAGAZ]]></text>
+			</staticText>
+			<textField>
+				<reportElement  x="131" y="14" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="131" y="34" width="152" height="40"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{adresse}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="131" y="74" width="152" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="181" y="14" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{prenom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="131" y="94" width="152" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="589" splitType="Stretch">
+			<staticText>
+				<reportElement  x="221" y="27" width="60" height="20"/>
+				<textElement/>
+				<text><![CDATA[Casablanca,]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement  x="281" y="27" width="182" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement  x="79" y="99" width="35" height="20"/>
+				<textElement/>
+				<text><![CDATA[Objet :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="114" y="99" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Attestation de travail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="46" y="154" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Madame, Monsieur,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="46" y="201" width="469" height="20"/>
+				<textElement/>
+				<text><![CDATA[Je soussigné Monsieur LAMRAOUI Rachid agissant en qualité de Directeur Générale de la société]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="46" y="221" width="114" height="20"/>
+				<textElement/>
+				<text><![CDATA[City System certifie que]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="346" y="221" width="123" height="20"/>
+				<textElement/>
+				<text><![CDATA[travaille au sein de notre société depuis ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="46" y="241" width="85" height="20"/>
+				<textElement/>
+				<text><![CDATA[société depuis le ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="174" y="241" width="63" height="20"/>
+				<textElement/>
+				<text><![CDATA[en qualité de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="46" y="279" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[De plus, j'atteste que ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="313" y="279" width="202" height="20"/>
+				<textElement/>
+				<text><![CDATA[n'est ni en période d'essai, ni en préavis ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="46" y="299" width="237" height="20"/>
+				<textElement/>
+				<text><![CDATA[suite à démission ou licenciement.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="46" y="335" width="482" height="20"/>
+				<textElement/>
+				<text><![CDATA[Cette attestation est délivrée à la demande de l'intéressé pour servir et valoir ce que de droit.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="46" y="418" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fait à Casablanca]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement  x="139" y="418" width="126" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement  x="463" y="521" width="65" height="20"/>
+				<textElement/>
+				<text><![CDATA[Signature]]></text>
+			</staticText>
+			<textField>
+				<reportElement  x="160" y="221" width="21" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{civilite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="178" y="221" width="83" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="237" y="221" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{prenom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="131" y="241" width="47" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DateNaissTravail}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="237" y="241" width="183" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DescriptionPoste}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="214" y="279" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{prenom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="160" y="279" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="145" y="279" width="15" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{civilite}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement  x="0" y="13" width="555" height="1" forecolor="#FF9900"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

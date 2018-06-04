@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ETATCONGE" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="demandeur" class="java.lang.String"/>
+	<parameter name="periodeCongeDeb" class="java.lang.String"/>
+	<parameter name="nbrJrOuvr" class="java.lang.String"/>
+	<parameter name="momSortie" class="java.lang.String"/>
+	<parameter name="momEntree" class="java.lang.String"/>
+	<parameter name="natureConge" class="java.lang.String"/>
+	<parameter name="typeConge" class="java.lang.String"/>
+	<parameter name="periodeCongeFin" class="java.lang.String"/>
+	<parameter name="superieur" class="java.lang.String"/>
+	<parameter name="remplacant" class="java.lang.String"/>
+	<parameter name="matricule" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numDemandeConge" class="java.lang.String"/>
+	<parameter name="lieuConge" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="signatureRH" class="java.lang.String"/>
+	<parameter name="DroitAnnuelle" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="congePris" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="congeDemande" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ReliquatDA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cumulJourNNPris" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="congeSP" class="java.lang.String"/>
+	<parameter name="total" class="java.lang.String"/>
+	<parameter name="maladie" class="java.lang.String">
+		<defaultValueExpression><![CDATA["--------"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="justifs" class="java.lang.String">
+		<defaultValueExpression><![CDATA["--------"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dateDemande" class="java.util.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="soldeAnterieur" class="java.lang.String"/>
+	<parameter name="reliquatSA" class="java.lang.String"/>
+	<parameter name="soldeAnneeEnCours" class="java.lang.String"/>
+	<parameter name="reliquatAnneeEncours" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT Personnel.Prenom+' '+Personnel.Nom as 'Nom Prénom',
+DATEDIFF(YEAR,Personnel.DateEmbaucheGroupe,SYSDATETIME()) as 'ancienté',
+Poste.LibellePoste
+FROM Personnel , Poste
+where Personnel.PosteIdPoste = Poste.IdPoste
+and  matricule = $P{matricule}]]>
+	</queryString>
+	<field name="Nom Prénom" class="java.lang.String"/>
+	<field name="ancienté" class="java.lang.Integer"/>
+	<field name="LibellePoste" class="java.lang.String"/>
+	<variable name="Reliquat" class="java.lang.Float" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[new Float($P{DroitAnnuelle}-($P{congePris}+$P{congeDemande}))]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="74" splitType="Stretch">
+			<staticText>
+				<reportElement  x="206" y="55" width="24" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N°:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement  x="501" y="55" width="54" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="230" y="55" width="169" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{numDemandeConge}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement  x="0" y="0" width="96" height="71"/>
+				<imageExpression><![CDATA["C:\\VDocPlatform\\JBoss\\server\\all\\deploy\\vdoc.ear\\vdoc.war\\RH\\"+$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement  x="447" y="55" width="53" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Casablanca, le]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="642" splitType="Stretch">
+			<staticText>
+				<reportElement  x="30" y="108" width="75" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nom prénom]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="30" y="224" width="122" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Durée du congé]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement  x="179" y="226" width="40" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nbrJrOuvr}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement  x="30" y="188" width="122" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Supérieur Hiérarchique]]></text>
+			</staticText>
+			<textField>
+				<reportElement  x="179" y="188" width="226" height="22"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{superieur}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement  x="30" y="168" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remplaçant]]></text>
+			</staticText>
+			<textField>
+				<reportElement  x="179" y="168" width="202" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{remplacant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="179" y="107" width="202" height="21"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Nom Prénom}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement  x="347" y="539" width="171" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Visa Ressources Humaines :]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement  x="0" y="24" width="555" height="44" forecolor="#C0C0C0" backcolor="#C1C1DB"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement  x="1" y="36" width="554" height="20" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMPTE RENDU D'ANNULATION CONGÉ PROFESSIONNEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="160" y="108" width="7" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="160" y="128" width="7" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="30" y="128" width="75" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fonction]]></text>
+			</staticText>
+			<textField>
+				<reportElement  x="179" y="128" width="202" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LibellePoste}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement  x="30" y="148" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ancienneté]]></text>
+			</staticText>
+			<textField>
+				<reportElement  x="179" y="148" width="25" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ancienté}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement  x="160" y="148" width="7" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="160" y="168" width="7" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="160" y="188" width="7" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="160" y="224" width="7" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="70" y="258" width="17" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Du]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement  x="87" y="258" width="130" height="18"/>
+			</rectangle>
+			<staticText>
+				<reportElement  x="261" y="258" width="24" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Au]]></text>
+			</staticText>
+			<textField>
+				<reportElement  x="90" y="258" width="112" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{periodeCongeDeb}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement  x="288" y="258" width="130" height="18"/>
+			</rectangle>
+			<textField>
+				<reportElement  x="290" y="258" width="106" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{periodeCongeFin}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement  x="1" y="354" width="141" height="33" forecolor="#000000" backcolor="#C1C1DB"/>
+			</rectangle>
+			<rectangle>
+				<reportElement  x="142" y="321" width="98" height="33" backcolor="#C1C1DB"/>
+			</rectangle>
+			<rectangle>
+				<reportElement  x="240" y="321" width="99" height="33" backcolor="#C1C1DB"/>
+			</rectangle>
+			<rectangle>
+				<reportElement  x="142" y="387" width="98" height="33"/>
+			</rectangle>
+			<rectangle>
+				<reportElement  x="1" y="387" width="141" height="33" backcolor="#C1C1DB"/>
+			</rectangle>
+			<rectangle>
+				<reportElement  x="240" y="354" width="99" height="33"/>
+			</rectangle>
+			<rectangle>
+				<reportElement  x="142" y="354" width="98" height="33"/>
+			</rectangle>
+			<rectangle>
+				<reportElement  x="339" y="354" width="98" height="33"/>
+			</rectangle>
+			<rectangle>
+				<reportElement  x="437" y="420" width="99" height="33" backcolor="#C1C1DB"/>
+			</rectangle>
+			<staticText>
+				<reportElement  x="149" y="321" width="87" height="33" forecolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Congé avant annulation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="248" y="321" width="86" height="33" forecolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Congé annulé]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="11" y="387" width="127" height="33" forecolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solde antérieur]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement  x="445" y="421" width="86" height="32" forecolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement  x="199" y="226" width="113" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[jour(s)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="30" y="208" width="100" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Type de congé]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="160" y="208" width="7" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement  x="179" y="208" width="349" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{typeConge}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement  x="193" y="148" width="34" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[an(s)]]></text>
+			</staticText>
+			<line>
+				<reportElement  x="0" y="0" width="555" height="1" forecolor="#0E2D6B" backcolor="#0E2D6B"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement  x="87" y="276" width="39" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Sortie :]]></text>
+			</staticText>
+			<textField>
+				<reportElement  x="116" y="276" width="91" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{momSortie}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement  x="288" y="276" width="39" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Entrée :]]></text>
+			</staticText>
+			<textField>
+				<reportElement  x="320" y="276" width="91" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{momEntree}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement  x="30" y="88" width="75" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date demande : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="160" y="88" width="7" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement  x="179" y="87" width="202" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateDemande}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement  x="339" y="321" width="98" height="33" backcolor="#C1C1DB"/>
+			</rectangle>
+			<rectangle>
+				<reportElement  x="240" y="387" width="99" height="33"/>
+			</rectangle>
+			<rectangle>
+				<reportElement  x="339" y="387" width="98" height="33"/>
+			</rectangle>
+			<staticText>
+				<reportElement  x="11" y="354" width="127" height="33" forecolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solde année en cours]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement  x="437" y="354" width="99" height="33"/>
+			</rectangle>
+			<rectangle>
+				<reportElement  x="437" y="387" width="99" height="33"/>
+			</rectangle>
+			<rectangle>
+				<reportElement  x="437" y="321" width="99" height="33" backcolor="#C1C1DB"/>
+			</rectangle>
+			<staticText>
+				<reportElement  x="347" y="321" width="81" height="33" forecolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Congé spécial annulé]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement  x="347" y="387" width="81" height="33"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{congeSP}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement  x="248" y="387" width="86" height="33"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{congeDemande}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="149" y="387" width="89" height="33"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{soldeAnterieur}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="149" y="354" width="87" height="33"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{soldeAnneeEnCours}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement  x="445" y="321" width="86" height="33" forecolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reliquat]]></text>
+			</staticText>
+			<textField>
+				<reportElement  x="445" y="387" width="86" height="33"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{reliquatSA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="445" y="354" width="86" height="33"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{reliquatAnneeEncours}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement  x="1" y="420" width="436" height="33" backcolor="#C1C1DB"/>
+			</rectangle>
+			<staticText>
+				<reportElement  x="334" y="421" width="89" height="33" forecolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement  x="347" y="559" width="189" height="80"/>
+			</rectangle>
+			<image>
+				<reportElement  x="385" y="564" width="120" height="70"/>
+				<imageExpression><![CDATA["C:\\VDocPlatform\\JBoss\\server\\all\\deploy\\vdoc.ear\\vdoc.war\\RH\\"+$P{signatureRH}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="80" splitType="Stretch">
+			<textField>
+				<reportElement  x="436" y="26" width="80" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement  x="516" y="26" width="40" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
