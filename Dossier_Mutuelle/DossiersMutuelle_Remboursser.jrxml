@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DossiersMutuelle" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="New Dataset 1" >
+		<queryString>
+			<![CDATA[select  P.Nom+' '+P.Prenom as 'Demandeur',
+		dm.Personnelmatricule,
+		dm.NumDossier ,
+		db.TypeBeneficiare,
+		P.RIB,
+		dm.statutValidation,
+		dm.Montant,
+		dm.dateRemboursement,
+		C.Prenom
+
+from DossierMutuelle dm, personnel P, DossierBeneficiaire db, Conjoint C
+
+where P.matricule = dm.Personnelmatricule
+	and dm.NumDossier=db.DossierMutuelleNumDossier
+	and C.NCMIM = db.BeneficiaireNCMIM
+	and (dm.statutValidation = 'Remboursé'
+	and dm.etat = 'Imprimer')
+
+
+
+union
+
+
+select  P.Nom+' '+P.Prenom as 'Demandeur',
+		dm.Personnelmatricule,
+		dm.NumDossier ,
+		db.TypeBeneficiare,
+		P.RIB,
+		dm.statutValidation,
+		dm.Montant,
+		dm.dateRemboursement,
+		E.Prenom
+
+from DossierMutuelle dm, personnel P, DossierBeneficiaire db, Enfant E
+
+where P.matricule = dm.Personnelmatricule
+	and dm.NumDossier=db.DossierMutuelleNumDossier
+	and E.NCMIM = db.BeneficiaireNCMIM
+	and (dm.statutValidation = 'Remboursé'
+	and dm.etat = 'Imprimer')
+
+
+
+
+union
+
+
+select  P.Nom+' '+P.Prenom as 'Demandeur',
+		dm.Personnelmatricule,
+		dm.NumDossier ,
+		db.TypeBeneficiare,
+		P.RIB,
+		dm.statutValidation,
+		dm.Montant,
+		dm.dateRemboursement,
+		p.Prenom
+
+from DossierMutuelle dm, personnel P, DossierBeneficiaire db
+
+where P.matricule = dm.Personnelmatricule
+	and dm.NumDossier=db.DossierMutuelleNumDossier
+	and p.NCMIM = db.BeneficiaireNCMIM
+	and (dm.statutValidation = 'Remboursé'
+	and dm.etat = 'Imprimer')]]>
+		</queryString>
+		<field name="Demandeur" class="java.lang.String"/>
+		<field name="Personnelmatricule" class="java.lang.String"/>
+		<field name="NumDossier" class="java.lang.String"/>
+		<field name="TypeBeneficiare" class="java.lang.String"/>
+		<field name="RIB" class="java.lang.String"/>
+		<field name="statutValidation" class="java.lang.String"/>
+		<field name="Montant" class="java.lang.Float"/>
+		<field name="dateRemboursement" class="java.sql.Date"/>
+		<field name="Prenom" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="Filiale" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select sysdatetime()as 'dateTime']]>
+	</queryString>
+	<field name="dateTime" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="234" splitType="Stretch">
+			<staticText>
+				<reportElement  x="182" y="132" width="479" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="24"/>
+				</textElement>
+				<text><![CDATA[La liste des Dossiers Mutuelles Remboursés]]></text>
+			</staticText>
+			<line>
+				<reportElement  x="24" y="212" width="768" height="1"/>
+			</line>
+			<staticText>
+				<reportElement  x="0" y="0" width="156" height="16"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENTREPRISE :
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="0" y="33" width="156" height="39"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[163, Bd Hassan II
+Casablanca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="307" y="53" width="375" height="19"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAISSE MUTUALISTE INTERPROFESSIONNELLE MAROCAINE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="582" y="72" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[-CMIM-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="593" y="192" width="73" height="20"/>
+				<textElement/>
+				<text><![CDATA[Casablanca, le ]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement  x="666" y="192" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement  x="0" y="16" width="205" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Filiale}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="269" splitType="Stretch">
+			<componentElement>
+				<reportElement  key="table 1" style="table 1" x="11" y="22" width="781" height="218"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="New Dataset 1" >
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column  width="94">
+						<jr:tableHeader style="table_TH" height="42" rowSpan="1">
+							<staticText>
+								<reportElement  x="0" y="0" width="94" height="42"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Nom]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table" height="30" rowSpan="1">
+							<textField>
+								<reportElement  x="0" y="0" width="94" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Demandeur}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column  width="57">
+						<jr:tableHeader style="table_TH" height="42" rowSpan="1">
+							<staticText>
+								<reportElement  x="0" y="0" width="57" height="42"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Matricule]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table" height="30" rowSpan="1">
+							<textField>
+								<reportElement  x="0" y="0" width="57" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Personnelmatricule}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column  width="82">
+						<jr:tableHeader style="table_TH" height="42" rowSpan="1">
+							<staticText>
+								<reportElement  x="0" y="0" width="79" height="42"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11" isBold="true"/>
+								</textElement>
+								<text><![CDATA[RIB]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table" height="30" rowSpan="1">
+							<textField>
+								<reportElement  x="0" y="0" width="79" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{RIB}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column  width="111">
+						<jr:tableHeader style="table_TH" height="42" rowSpan="1">
+							<staticText>
+								<reportElement  x="0" y="0" width="111" height="42"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11" isBold="true"/>
+								</textElement>
+								<text><![CDATA[N° de dossier]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table" height="30" rowSpan="1">
+							<textField>
+								<reportElement  x="0" y="0" width="111" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{NumDossier}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column  width="51">
+						<jr:tableHeader style="table_TH" height="42" rowSpan="1">
+							<staticText>
+								<reportElement  x="0" y="0" width="50" height="42"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Bénéf.]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table" height="30" rowSpan="1">
+							<textField>
+								<reportElement  x="0" y="0" width="50" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{TypeBeneficiare}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column  width="107">
+						<jr:tableHeader style="table_TH" height="42" rowSpan="1">
+							<staticText>
+								<reportElement  x="0" y="0" width="104" height="42"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Prénom Bénéf.]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table" height="30" rowSpan="1">
+							<textField>
+								<reportElement  x="0" y="0" width="104" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Prenom}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column  width="90">
+						<jr:tableHeader style="table_TH" height="42" rowSpan="1">
+							<staticText>
+								<reportElement  x="0" y="0" width="90" height="42"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Statut ]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table" height="30" rowSpan="1">
+							<textField>
+								<reportElement  x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{statutValidation}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column  width="90">
+						<jr:tableHeader style="table_TH" height="42" rowSpan="1">
+							<staticText>
+								<reportElement  x="0" y="0" width="90" height="42"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Date Remboursement ]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table" height="30" rowSpan="1">
+							<textField pattern="dd/MM/yyyy">
+								<reportElement  x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{dateRemboursement}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column  width="90">
+						<jr:tableHeader style="table_TH" height="42" rowSpan="1">
+							<staticText>
+								<reportElement  x="0" y="0" width="90" height="42"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Montant Remboursé]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table" height="30" rowSpan="1">
+							<textField>
+								<reportElement  x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Montant}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
